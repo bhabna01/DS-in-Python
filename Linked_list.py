@@ -6,9 +6,12 @@ class Node:
 class LinkedList:
     def __init__(self):
         self.head=None
+
     def insert_At_begining(self,data):
         node =Node(data,self.head)
         self.head=node
+
+
     def insert_At_end(self,data):
         if self.head is None:
             self.head=Node(data,None)
@@ -17,6 +20,8 @@ class LinkedList:
         while itr.next:
             itr=itr.next
         itr.next=Node(data,None)
+
+
     def print(self):
         if self.head is None:
             print("Linked list is empty")
@@ -26,10 +31,12 @@ class LinkedList:
             llstr+=str(itr.data)+'-->'
             itr=itr.next
         print(llstr)
+
     def insert_values(self,data_list):
         self.head=None
         for data in data_list:
             self.insert_At_end(data)
+
     def insert_at(self,index,data):
         if index<0 or index>self.get_length():
             raise Exception("Invalid Index")
@@ -53,6 +60,34 @@ class LinkedList:
             count+=1
             itr=itr.next
         return count
+    def insert_after_value(self, data_after, data_to_insert):
+        if self.head is None:
+            return
+        if self.head.data==data_after:
+            self.head.next=Node(data_to_insert,self.head.next)
+            return
+        itr=self.head
+        while itr:
+            if itr.data==data_after:
+                itr.next=Node(data_to_insert,itr.next)
+                break
+            itr=itr.next
+  
+
+    def remove_by_value(self, data):
+        if self.head is None:
+            return
+        if self.head.data==data:
+            self.head=self.head.next
+            return
+        itr=self.head
+        while itr.next:
+            if itr.next.data==data:
+                itr.next=itr.next.next
+                break
+            itr=itr.next
+
+
     def remove_at(self,index):
         if index<0 or index>=self.get_length():
             raise Exception("Invalid index")
@@ -77,6 +112,10 @@ if __name__=='__main__':
     ll.insert_values(["banana","mango","grapes","orange"])
     # ll.remove_at(2)
     ll.insert_at(0,"figs")
+    ll.print()
+    ll.insert_after_value("mango","apple")
+    ll.print()
+    ll.remove_by_value("banana")
     ll.print()
     print("Length of the linked list is",ll.get_length())
 
