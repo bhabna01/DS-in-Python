@@ -5,7 +5,7 @@ def generate1(strlen):
     for i in range(strlen):
         res =res + alphabet[random.randrange(27)]
     return res
-print(generate1(28))
+# print(generate1(28))
 
 def score(goal,testString):
     numsame=0
